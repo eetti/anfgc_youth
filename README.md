@@ -1,6 +1,6 @@
 # All Nations Youth
 
-A lightweight, responsive website for the youth community of All Nations Full Gospel Church Halifax. Built with semantic HTML, CSS, JavaScript, and Vite. No backend, credentials, externally hosted fonts, or image services required.
+A lightweight, responsive website for the youth community of All Nations Full Gospel Church Halifax. Built with semantic HTML, CSS, JavaScript, and Vite. No backend or externally hosted fonts required. The interactive OpenStreetMap map needs no access token.
 
 ## Local development
 
@@ -37,7 +37,7 @@ The supplied Framer reference and church pages were blocked by the cloud environ
 Before public launch:
 
 - Review the design against https://adriancole.framer.ai/ once accessible.
-- Verify ministry details against https://www.anfgchalifax.com/any-goodlife and obtain approval for the copy.
+- Verify ministry details against https://www.anfgchalifax.com/ and obtain approval for the copy.
 - Confirm the preferred ministry name and branding, audience ages, venue, contact method, and any approved photos. The current draft deliberately uses church links instead of unverified details or a nonfunctional contact form.
 - Choose and authorize the production subdomain. Add canonical and social-sharing URLs once the actual domain is known.
 
@@ -56,8 +56,20 @@ Instagram: https://www.instagram.com/any.hfx/ (provided by the project owner). L
 
 ## Meeting schedule
 
-Saturdays, 4–6 pm (Halifax local time), provided by the project owner. Displayed in the contact section and meeting FAQ. Venue remains to be confirmed.
+Saturdays, 4–6 pm (Halifax local time), provided by the project owner. Displayed in the contact section and meeting FAQ. Venue: 2010 Purcells Cove Road, Halifax, Nova Scotia.
 
 ## Color palette
 
 User-selected Coolors palette: `#000000` (black), `#AB9865` (gold), `#DAD2BC` (sand), `#388659` (green), `#26619C` (blue). Source: https://coolors.co/000000-ab9865-dad2bc-388659-26619c
+
+## Events
+
+Edit `src/events.json` to add or update events. Each entry needs a unique URL-safe `slug`, `title`, `schedule`, `timezone`, `address`, `summary`, `description`, and `note`. The homepage lists these events; `npm run build` generates a separate static details page at `/events/<slug>.html`. `npm run dev` generates these pages before starting; restart it after adding new event slugs. Do not edit generated files under `events/` or `dist/`. Commit the data changes and redeploy to publish updates. Use an explicit date in `schedule` for one-off events; remove past entries when appropriate.
+
+## Leaflet + OpenStreetMap map
+
+No access token or environment variable is needed. On both the homepage and event pages, **Show interactive map** looks up the address using OpenStreetMap's Nominatim service and displays OpenStreetMap tiles through Leaflet. The map includes contributor attribution. Successful address lookups are cached in the browser for 30 days; requests are serialized and spaced by at least 1.1 seconds. No automatic geocoding or autocomplete requests are made.
+
+The site needs access to `nominatim.openstreetmap.org` and `tile.openstreetmap.org`. Security headers permit only these map services. The address and directions link remain available if either service fails. Public OSM services have usage limits; review their policies and use a dedicated provider if traffic grows. For a fixed venue, verified coordinates can replace geocoding in a future update. Do not guess coordinates.
+
+Live address lookup was blocked by the development environment's network policy during this change. Browser checks use controlled responses to verify map rendering, caching, and failure handling; they do not establish the real venue's coordinates or live tile availability.
