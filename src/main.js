@@ -33,7 +33,11 @@ if (list) {
   const summary = document.createElement('p'); summary.textContent=event.summary;
   const address = document.createElement('p'); address.textContent=event.address;
   const link = document.createElement('a'); link.className='text-link'; link.href=`/events/${event.slug}.html`; link.textContent='View event details →'; link.setAttribute('aria-label', `View details: ${event.title}`);
-  card.append(schedule,title,summary,address,link); list.append(card);
+  const visual = document.createElement('div'); visual.className='event-visual';
+  const day = document.createElement('span'); day.textContent=event.schedule;
+  const invitation = document.createElement('strong'); invitation.textContent='YOU BELONG HERE.';
+  visual.append(day,invitation);
+  card.append(schedule,visual,title,summary,address,link); list.append(card);
  }
 }
 initializeMaps();

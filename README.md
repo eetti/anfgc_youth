@@ -73,3 +73,7 @@ No access token or environment variable is needed. On both the homepage and even
 The site needs access to `nominatim.openstreetmap.org` and `tile.openstreetmap.org`. Security headers permit only these map services. The address and directions link remain available if either service fails. Public OSM services have usage limits; review their policies and use a dedicated provider if traffic grows. For a fixed venue, verified coordinates can replace geocoding in a future update. Do not guess coordinates.
 
 Live address lookup was blocked by the development environment's network policy during this change. Browser checks use controlled responses to verify map rendering, caching, and failure handling; they do not establish the real venue's coordinates or live tile availability.
+
+## Design direction
+
+The current layout adapts the user-provided screenshot of https://bio.framer.media/: compact navigation, spacious editorial typography, black introduction and community panels, a centered event listing, and a blue footer. It retains the selected palette, worship photo, event pages, and OpenStreetMap integration.
